@@ -1,0 +1,26 @@
+table.slotGrid {
+    border-collapse: collapse;
+    width: 100%;
+    background: #fff;
+}
+
+table.slotGrid tr:hover {
+  background-color: #fbf9e7; 
+}
+
+table.slotGrid td {
+    font-weight: normal;
+    padding: 7px;
+    border-collapse: collapse;
+    border-bottom: 1px solid #dadada;
+}
+
+table.slotGrid thead td {
+    background-color: #f0f0f0;
+    vertical-align: bottom;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 7px;
+    text-align: left;
+    border-bottom: 1px solid #a7a7a7;
+}

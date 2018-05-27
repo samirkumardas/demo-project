@@ -8,14 +8,18 @@ export const getFilteredSlots = createSelector(
   filterSelector,
   (slots, filter) => {
     return slots.filter(slot => {
-        let valid = true;
-        if (filter.keyword && slot.get('name').search(filter.keyword) === -1) {
+        let keyword = filter.get('keyword'),
+            type = parseInt(filter.get('type'),10),
+            format = filter.get('format'),
+            regex = new RegExp(keyword,"ig"),
+            valid = true;
+        if (keyword && (slot.name.search(regex) === -1 && slot.id.toString().search(regex) === -1)) {
            valid = false;
         }
-        if (filter.type && slot.get('type') !== filter.type) {
+        if (type && slot.type !== type) {
            valid = false;
         }
-        if (filter.format && slot.get('format') !== filter.format) {
+        if (format && slot.format !== format) {
            valid = false;
         }
         return valid;

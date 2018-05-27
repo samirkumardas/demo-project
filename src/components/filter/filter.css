@@ -1,0 +1,10 @@
+.filterBar {
+    height: 35px;
+    width: 100%;
+    text-align: right;
+}
+
+.filterBar div.keyword, div.drowdown  {
+    display: inline-block;
+    padding: 0px 10px;
+}

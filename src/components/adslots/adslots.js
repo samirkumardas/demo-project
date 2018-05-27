@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-//import { fetchSlots } from './components/Adslots/reducers';
+import { selectSlot } from './reducer';
 import { getFilteredSlots } from './selector';
+import Heading from './heading';
 import SlotList from './slotlist';
+import styles from './adslots.css';
 
 class Adslots extends Component {
     
     constructor(props) {
         super(props);
-        //this.saveBook = this.saveBook.bind(this);
+        this.onCheckboxMark = this.onCheckboxMark.bind(this);
+    }
+
+    onCheckboxMark(event) {
+
     }
 
     /*
@@ -34,7 +40,8 @@ class Adslots extends Component {
     render() {
         return (
             <div>
-               <table>
+               <table className={styles.slotGrid}>
+                <Heading onCheckboxMark={this.onCheckboxMark} />
                  <SlotList
                     slots={this.props.slots} />
                </table>

@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getSlotTypeName } from 'utils/helper';
 
 const Slot = ({ slot }) => {
 	return (
 			<tr>
+			    <td><input value={slot.id} type="checkbox" /></td>
 				<td>{slot.id}</td>
 				<td>{slot.name}</td>
-				<td>{slot.author}</td>
-				<td>{slot.type}</td>
+				<td>{getSlotTypeName(slot.type) }</td>
 				<td>{slot.format}</td>
 			</tr>
 	);	

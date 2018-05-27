@@ -7,7 +7,7 @@ const SlotList = ({slots}) => {
 	return (
 		<tbody id="container">
 		   {
-		   	 slots.map((slot)=> {
+		   	 slots.map(slot => {
 		   		return (
 		   			<Slot
 		   				key={slot.id}

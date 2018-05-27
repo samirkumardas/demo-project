@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from './header/header';
+import Filter from './filter/filter';
 import { fetchSlots } from './adslots/reducer';
+import { toggleLoader } from './loader/reducer';
 import Adslots from './adslots/adslots';
+import Loader from './loader/loader';
+import styles from './app.css';
 //import Footer from 'components/Footer';
 //import { addBook, editBook, deleteBook, fetchBookList, changeFilterType } from 'actions/book';
 
@@ -24,6 +28,7 @@ class App extends Component {
     
     componentDidMount() {
     	this.props.dispatch(fetchSlots());
+        this.props.dispatch(toggleLoader());
     }
 
     /*
@@ -60,7 +65,9 @@ class App extends Component {
 	render() {
 		return (
             <div>
+                <Loader showLoader = {this.props.loading} />
 				<Header />
+                <Filter />
                 <Adslots />
              </div>
 		);	
@@ -68,13 +75,11 @@ class App extends Component {
 		
 }
 
-/*
 const mapStateToProps = (state) => {
 	return {
-		books: getFilterdBooks(state),
-		filterType: state.filterType
+		loading: state.get('loader')
 	};
-};*/
+};
 
 /*
 const mapDispatchToProps = (dispatch) => {
@@ -98,4 +103,4 @@ App.propTypes = {
 	fetchBookList: PropTypes.func
 }; */
 
-export default connect(dispatch => ({dispatch}))(App);
+export default connect(mapStateToProps, dispatch => ({dispatch}))(App);
