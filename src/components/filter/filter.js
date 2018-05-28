@@ -27,7 +27,6 @@ class Filter extends Component {
         this.props.dispatch(updateFilterFormat(event.target.value));
     }
 
-
     render() {
         return (
             <div className={styles.filterBar}>
@@ -47,7 +46,6 @@ class Filter extends Component {
             </div>
         );  
     }
-        
 }
 
 export default connect(dispatch => ({dispatch}))(Filter);
