@@ -5,7 +5,7 @@ const Heading = (props) => {
     return (
       <thead>  
         <tr>
-            <td><input onChange={props.onCheckboxMark} type="checkbox" /></td>
+            <td><input checked={props.isChecked} value="0" onChange={props.onSlotCheckboxChange} type="checkbox" /></td>
             <td>ID</td>
             <td>Name</td>
             <td>Type</td>

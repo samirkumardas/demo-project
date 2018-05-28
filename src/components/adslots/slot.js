@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getSlotTypeName } from 'utils/helper';
 
-const Slot = ({ slot }) => {
+const Slot = ({ slot, isChecked, onSlotCheckboxChange }) => {
 	return (
 			<tr>
-			    <td><input value={slot.id} type="checkbox" /></td>
+			    <td><input checked={isChecked} value={slot.id} onChange={onSlotCheckboxChange} type="checkbox" /></td>
 				<td>{slot.id}</td>
 				<td>{slot.name}</td>
 				<td>{getSlotTypeName(slot.type) }</td>

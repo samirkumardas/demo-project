@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slot from './slot';
 
-const SlotList = ({slots}) => {	
+const SlotList = ({slots, selected, onSlotCheckboxChange}) => {	
 
 	return (
 		<tbody id="container">
@@ -11,7 +11,9 @@ const SlotList = ({slots}) => {
 		   		return (
 		   			<Slot
 		   				key={slot.id}
-		   				slot = {slot} />
+		   				slot = {slot}
+		   				isChecked={selected.findIndex(item => item === slot.id) !== -1}
+		   				onSlotCheckboxChange={onSlotCheckboxChange} />
 		   		);
 		   	})
 		   }
