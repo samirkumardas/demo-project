@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toggleLoader } from '../loader/reducer';
-import { slotAddAction, slotEditAction } from './action';
+import Adsform from '../adslots/adsform';
 import styles from './buttons.css';
 
 class Buttons extends Component {
@@ -10,19 +9,47 @@ class Buttons extends Component {
     constructor(props) {
         super(props);
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
+        this.cancelForm = this.cancelForm.bind(this);
+        this.addForm = this.addForm.bind(this);
+        this.editForm = this.editForm.bind(this);
+        this.state = {
+            formVisibility: false,
+            id: 0
+        };
     }
 
     onDeleteHandler(event) {
         alert('Oops! Delete API is not available!');
     }
 
+    cancelForm() {
+        this.setState({
+            formVisibility: false
+        });
+    }
+
+    addForm() {
+        this.setState({
+            formVisibility: true
+        });
+    }
+
+    editForm() {
+        let id = parseInt(this.props.selected.get(0));
+        this.setState({
+            formVisibility: true,
+            id: id
+        }); 
+    }
+
     render() {
         return (
              <div className={styles.action}>
-                   <button>Add</button>
+                   {this.state.formVisibility && <Adsform id={this.state.id} cancelForm={this.cancelForm}  />}
+                   <button onClick={this.addForm}>Add</button>
                    {this.props.selected.size > 0
                         && <span>
-                             <button>Edit</button>
+                             <button onClick={this.editForm}>Edit</button>
                              <button onClick={this.onDeleteHandler} className={styles.btnDelete}>Delete</button>
                           </span>
                     }

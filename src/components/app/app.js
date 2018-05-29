@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../header/header';
 import Toolbar from '../toolbar/toolbar';
-import { fetchSlots } from '../adslots/reducer';
+import { fetchSlotsReq } from '../adslots/reducer';
 import { toggleLoader } from '../loader/reducer';
 import Adslots from '../adslots/adslots';
 import Loader from '../loader/loader';
@@ -27,7 +27,7 @@ class App extends Component {
 
     
     componentDidMount() {
-    	this.props.dispatch(fetchSlots());
+    	this.props.dispatch(fetchSlotsReq());
         this.props.dispatch(toggleLoader());
     }
 

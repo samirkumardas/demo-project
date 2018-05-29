@@ -1,10 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { slotAddAction, slotEditAction } from './action';
+import { slotDetailAction, slotAddAction, slotEditAction } from './reducer';
 import { toggleLoader } from '../loader/reducer';
 
-function* workerDeleteSlots(action) {
-  const requestURL = 'http://localhost:8080/adslots/';
+function* workerFetchSlotDetail(action) {
+  const requestURL = 'http://localhost:8080/adslots/'+action;
   try {
     const response = yield call(request, requestURL);
     yield put(insertSlot(response.data.adslots));
@@ -14,6 +14,6 @@ function* workerDeleteSlots(action) {
   }
 }
 
-export function* watcherDeleteSlots() {
-  yield takeLatest(slotDeleteAction.getType(), workerDeleteSlots);
+export function* watcherFetchSlotDetail() {
+  yield takeLatest(slotDetailAction.getType(), workerFetchSlotDetail);
 }

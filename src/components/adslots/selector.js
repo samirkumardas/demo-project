@@ -26,3 +26,9 @@ export const getFilteredSlots = createSelector(
     });
   }
 );
+
+/*
+export const getSlotDetailById = (id) => {
+  const index = slotsSelector.findIndex(slot => slot.id === id);
+  return slotsSelector.get(index);
+}; */

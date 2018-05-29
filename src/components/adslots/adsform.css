@@ -1,26 +1,60 @@
-table.slotGrid {
-    border-collapse: collapse;
-    width: 100%;
+.adsOverlay{
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.adsForm{
+    width: 500px;
+    margin: 0 auto;
+    padding: 15px;
+    position: fixed;
     background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -120px;
+    z-index: 2;
 }
 
-table.slotGrid tr:hover {
-  background-color: #fbf9e7; 
-}
-
-table.slotGrid td {
-    font-weight: normal;
-    padding: 7px;
-    border-collapse: collapse;
-    border-bottom: 1px solid #dadada;
-}
-
-table.slotGrid thead td {
-    background-color: #f0f0f0;
-    vertical-align: bottom;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 6px 7px;
+.adsForm ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     text-align: left;
-    border-bottom: 1px solid #a7a7a7;
+}
+
+.adsForm ul li {
+    padding: 5px;
+    width: 240px;
+    float: left;
+}
+
+.adsForm ul li label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.adsForm li.formBtn{
+    text-align: right;;
+}
+
+.adsForm ul li  span{
+    color: #ec4848;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.errorShow {
+    display: block;;
+}
+
+.errorHide {
+    display: none;;
 }
