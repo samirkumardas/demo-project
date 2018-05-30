@@ -18,25 +18,6 @@ class Adslots extends Component {
         this.props.dispatch(updateSelectedSlot([event.target.value, this.props.slots]));
     }
 
-    /*
-    componentDidUpdate() {
-        if (this.props.formVisibitly) {
-            this.nodeTitle.value = this.props.formData.title;
-            this.nodeAuthor.value = this.props.formData.author;
-            this.nodeStatus.value = this.props.formData.status;
-            this.nodeId.value = this.props.formData.id; 
-        }
-    }   
-
-    saveBook() {
-        let title = this.nodeTitle.value,
-            author = this.nodeAuthor.value,
-            status = this.nodeStatus.value,
-            id = parseInt(this.nodeId.value);
-
-         this.props.saveBook({ title, author, status, id });
-    } */
-
     render() {
         return (
             <div>
@@ -60,5 +41,11 @@ const mapStateToProps = (state, props) => ({
   slots: getFilteredSlots(state, props),
   selected: state.getIn(['adslots', 'selected'])
 });
+
+Adslots.propTypes = {
+    slots: PropTypes.array.object,
+    selected: PropTypes.object,
+    dispatch: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(Adslots);

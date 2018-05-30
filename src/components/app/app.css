@@ -14,8 +14,6 @@
   height: 25px;
 }
 
-.toolbar {
-    height: 50px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+.app {
+    width: auto;
 }

@@ -18,7 +18,7 @@ class Buttons extends Component {
         };
     }
 
-    onDeleteHandler(event) {
+    onDeleteHandler() {
         alert('Oops! Delete API is not available!');
     }
 
@@ -59,8 +59,13 @@ class Buttons extends Component {
         
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   selected: state.getIn(['adslots', 'selected'])
 });
+
+Buttons.propTypes = {
+    selected: PropTypes.array.isRequired,
+    dispatch: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(Buttons);

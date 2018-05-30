@@ -15,4 +15,9 @@ const Heading = (props) => {
     );  
 };
 
+Heading.propTypes = {
+    isChecked: PropTypes.boolean,
+    onSlotCheckboxChange: PropTypes.func
+};
+
 export default Heading;

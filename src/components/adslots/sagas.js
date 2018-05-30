@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { fetchSlotsReq, slotSaveReq, slotDetailReq, insertSlot, setSlot, slotDetailSuccess, slotDetailFailed } from './reducer';
+import { fetchSlotsReq, slotSaveReq, slotDetailReq, insertSlot, setSlot, saveFailed, slotDetailSuccess, slotDetailFailed } from './reducer';
 import { toggleLoader } from '../loader/reducer';
 import { getAPIRequestHeader } from 'utils/helper';
 
 /* fetch list */
-function* workerFetchSlots(action) {
+function* workerFetchSlots() {
   const requestURL = 'http://localhost:8080/adslots/';
   try {
     const response = yield call(request, requestURL);

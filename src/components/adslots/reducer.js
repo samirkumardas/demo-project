@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 import { createAction, createReducer } from 'redux-act';
 import { fromJS } from 'immutable';
 
@@ -77,10 +76,10 @@ const adslots = createReducer({
     [insertSlot]: (state, payload) => state.update('slots', slots => slots.concat(payload)),
     [setSlot]: (state, payload) => doSetSlot(state, payload),
     [deleteSlot]: (state, payload) => state.update('slots', slots => slots.delete(findIndexFromList(slots, 'id', payload))),
-    [clearSelection]: (state, payload) => state.set('selected').clear(),
+    [clearSelection]: (state) => state.set('selected').clear(),
     [updateSelectedSlot]: (state, payload) => onSelectionChange(state, payload),
     [slotDetailSuccess]: (state, payload) => state.set('formData', fromJS(payload)),
-    [slotDetailFailed]: (state, payload) => state.set('formData', fromJS({dataError:true}))
+    [slotDetailFailed]: (state) => state.set('formData', fromJS({dataError:true}))
 }, initialState);
 
 export default adslots;

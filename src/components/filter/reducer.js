@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 import { createAction, createReducer } from 'redux-act';
 import { fromJS } from 'immutable';
 

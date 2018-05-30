@@ -9,20 +9,24 @@ import { getFormRules, getSlotTypes } from 'utils/helper';
 class Adsform extends Component {
     
     constructor(props) {
+        const errors = {},
+              fields = {};
         super(props);
-        this.state = { 
-            errors:{}, 
-            hasFetchedDone: false,
-            dataError: false
-        };
         this.slotTypes = getSlotTypes();
         this.rules = getFormRules();
         this.submitForm = this.submitForm.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.rules.forEach((rule) => {
-            this.state.errors[rule.name] = '';
-            this.state[rule.name] = '';
+            errors[rule.name] = '';
+            fields[rule.name] = '';
         });
+
+        this.state = { 
+            errors:errors, 
+            ...fields,
+            hasFetchedDone: false,
+            dataError: false
+        };
     }
 
     componentDidMount() {
@@ -180,9 +184,8 @@ class Adsform extends Component {
                 <li>
                   <label htmlFor="fallback">Fallback</label>
                    <input
-                        type="checkbox"
-                        name="fallback"
                         id="fallback"
+                        name="fallback"
                         checked={this.state.fallback}
                         ref={node => this._setFormNode('fallback', node)}
                         onChange={this.handleInputChange}
@@ -199,12 +202,15 @@ class Adsform extends Component {
     
 }
 
-/*
-Adsform.propTypes = {
-    
-};  */
 
-const mapStateToProps = (state, props) => ({
+Adsform.propTypes = {
+    formData: PropTypes.object.isRequired,
+    id: PropTypes.number,
+    cancelForm: PropTypes.func,
+    dispatch: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
   formData: state.getIn(['adslots', 'formData']).toJS()
 });
 
