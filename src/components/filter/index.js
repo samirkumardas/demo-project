@@ -49,7 +49,7 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-    dispatch: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
 };
 
 export default connect(dispatch => ({dispatch}))(Filter);

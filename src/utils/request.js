@@ -1,42 +1,35 @@
 import 'whatwg-fetch';
 
-/**
- * Parses the JSON returned by a network request
- * @param  {object} response A response from a network request
- * @return {object}          The parsed JSON from the request
- */
-function parseJSON(response) {
-  if (response.status === 204 || response.status === 205) {
-    return null;
-  }
-  return response.json();
+export default function request(url, option) {
+   return window.fetch(url, option)
+      .catch(handleError) 
+      .then(checkStatus)
+      .then(parseJSON)
+      .catch(error => {
+        throw error;
+      });
 }
 
-/**
- * Checks if a network request came back fine, and throws an error if not
- * @param  {object} response   A response from a network request
- * @return {object|undefined} Returns either the response, or throws an error
- */
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
+    if (response.status >= 200 && response.status < 300) {
+      return response;
+    }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+    return response.json().then(json => {
+        return window.Promise.reject({
+            status: response.status,
+            message: json.error ? json.error.message : (json.message ? json.message : '')
+        });
+    });
 }
 
-/**
- * Requests a URL, will return a promise
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           The response data
- */
-export default function request(url, options) {
-  /*eslint-disable */
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
-  /*eslint-disable */
+function parseJSON(response) {
+    if (response.status === 204 || response.status === 205) {
+      return null;
+    }
+    return response.json();
+}
+
+function handleError(error) {
+    throw error;
 }

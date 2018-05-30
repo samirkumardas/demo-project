@@ -15,8 +15,8 @@ const Slot = ({ slot, isChecked, onSlotCheckboxChange }) => {
 };
 
 Slot.propTypes = {
-    slot: PropTypes.object.isRequired,
-    isChecked: PropTypes.boolean,
+    slot: PropTypes.any.isRequired,
+    isChecked: PropTypes.bool,
     onSlotCheckboxChange: PropTypes.func.isRequired
 }
 

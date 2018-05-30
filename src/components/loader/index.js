@@ -14,7 +14,7 @@ const Loader = ({ showLoader }) => {
 };
 
 Loader.propTypes = {
-    showLoader: PropTypes.boolean.isRequired
+    showLoader: PropTypes.bool.isRequired
 };
 
 export default Loader;

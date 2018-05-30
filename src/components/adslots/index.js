@@ -43,9 +43,9 @@ const mapStateToProps = (state, props) => ({
 });
 
 Adslots.propTypes = {
-    slots: PropTypes.array.object,
-    selected: PropTypes.object,
-    dispatch: PropTypes.object.isRequired
+    slots: PropTypes.any.isRequired,
+    selected: PropTypes.any,
+    dispatch: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(Adslots);

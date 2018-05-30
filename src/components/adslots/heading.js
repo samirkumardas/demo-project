@@ -16,7 +16,7 @@ const Heading = (props) => {
 };
 
 Heading.propTypes = {
-    isChecked: PropTypes.boolean,
+    isChecked: PropTypes.bool,
     onSlotCheckboxChange: PropTypes.func
 };
 

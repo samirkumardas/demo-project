@@ -7,21 +7,19 @@ export const setSlot =  createAction('SET_SLOT');
 export const deleteSlot =  createAction('DELETE_SLOT');
 export const updateSelectedSlot =  createAction('UPDATE_SELECTED_SLOT');
 export const clearSelection =  createAction('CLEAR_SELECTION');
-
+export const showSlotForm =  createAction('SHOW_SLOT_FORM');
+export const hideSlotForm =  createAction('HIDE_SLOT_FORM');
 /* Request to API */
-
 
 export const fetchSlotsReq =  createAction('FETCH_SLOTS_REQ');
 export const slotSaveReq =  createAction('SLOT_SAVE_REQ');
 export const slotDetailReq =  createAction('SLOT_DETAIL_REQ');
-
-export const saveFailed =  createAction('SLOT_SAVE_FAILED');
+//export const saveFailed =  createAction('SLOT_SAVE_FAILED');
 export const slotDetailSuccess =  createAction('SLOT_DETAIL_SUCCESS');
-export const slotDetailFailed =  createAction('SLOT_DETAIL_FAILED');
 
 
 const findIndexFromList = (list, key, find) => {
-    return list.findIndex(item => item.get(key) === find);
+    return list.findIndex(item => item.id === find);
 };
 
 const getAllSlodIds = (slots) => {
@@ -58,19 +56,21 @@ const doSetSlot = (state, slot) => {
         index;
     if (id) {
         index = findIndexFromList(slots, 'id', id);
-        slots = slots.set(index, slot);
-    } else {
-        slots = slots.push(slot);
-    }
-
+        if (index === -1) {
+           slots = slots.push(slot);
+        } else {
+           slots = slots.set(index, slot); 
+        }
+    } 
     return state.set('slots', slots);
 };
 
 const initialState = fromJS({
     slots: [],
     selected: [],
-    formData: {}
-});
+    formData: {},
+    showForm: false
+}); 
 
 const adslots = createReducer({
     [insertSlot]: (state, payload) => state.update('slots', slots => slots.concat(payload)),
@@ -79,7 +79,8 @@ const adslots = createReducer({
     [clearSelection]: (state) => state.set('selected').clear(),
     [updateSelectedSlot]: (state, payload) => onSelectionChange(state, payload),
     [slotDetailSuccess]: (state, payload) => state.set('formData', fromJS(payload)),
-    [slotDetailFailed]: (state) => state.set('formData', fromJS({dataError:true}))
+    [showSlotForm]: (state) => state.set('showForm', true),
+    [hideSlotForm]: (state) => state.set('showForm', false)
 }, initialState);
 
 export default adslots;

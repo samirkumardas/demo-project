@@ -1,0 +1,30 @@
+.notice {
+    position: fixed;
+    left: 30px;
+    top: 10px;
+    right: 30px;
+    height: 55px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.errorNotice {
+    border: 1px solid #ec4141;
+    margin: 15px 0px;
+    padding: 10px;
+    background: #ffe7e7;
+}
+
+.generalNotice {
+    border: 1px solid #08942e;
+    margin: 15px 0px;
+    padding: 10px;
+    background: #f3fff0;
+}
+
+.notice abbr {
+    float: right;
+    color: #e02525;
+    font-size: 16px;
+}
+    

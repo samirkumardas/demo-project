@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './adsform.css';
-import { toggleLoader } from '../loader/reducer';
 import { slotSaveReq, slotDetailReq } from './reducer';
 import { getFormRules, getSlotTypes } from 'utils/helper';
 
@@ -24,21 +23,22 @@ class Adsform extends Component {
         this.state = { 
             errors:errors, 
             ...fields,
-            hasFetchedDone: false,
+            hasFetchedDone: !this.props.id,
             dataError: false
         };
     }
 
     componentDidMount() {
         if (this.props.id) {
-            this._requestSlotDetail();
+            this.requestSlotDetail();
         }
     }
 
     submitForm() {
         let isValid = true,
             errors = {},
-            payload = {};
+            payload = {},
+            id;
 
         this.rules.forEach((rule) => {
             if (rule.required
@@ -48,29 +48,29 @@ class Adsform extends Component {
                 errors[rule.name] = rule.message;
                 isValid = false;
             } else {
-                payload[rule.name] = this.state[rule.name];
+                payload[rule.name] = (rule.type === 'boolean') ? !!this.state[rule.name]
+                    : (rule.type === 'nmber') ? parseInt(this.state[rule.name],10) : this.state[rule.name];
             }
         });
 
+        this.setState({
+            errors:errors
+        });
+    
         if (isValid) {
-             if (this.props.id) {
-                payload.id = parseInt(this.props.id,10);
-             }
-             this.props.dispatch(slotSaveReq(payload));
-             this.props.dispatch(toggleLoader());
-        } else {
-            this.setState({
-                errors:errors
-            });
+             id = parseInt(this.props.id,10) || 0;
+             this.props.dispatch(slotSaveReq({
+                data:payload,
+                id : id
+             }));
         }
     }
 
-    _requestSlotDetail() {
-        this.props.dispatch(slotDetailReq(this.props.id));
-        this.props.dispatch(toggleLoader());
+    requestSlotDetail() {
+        this.props.dispatch(slotDetailReq(this.props.id,10));
     }
 
-    _setFormNode(type, node) {
+    setFormNode(type, node) {
         this.rules.forEach((rule) => {
             type === rule.type ? (rule.node = node && rule) : rule;
         });
@@ -98,8 +98,8 @@ class Adsform extends Component {
             });
         }
 
-        if (props.dataError) {
-            nextState.dataError = true;
+        if (props.apiError) {
+            nextState.apiError = true;
         }
         if (Object.keys(nextState).length) {
             nextState.hasFetchedDone = true;
@@ -108,11 +108,8 @@ class Adsform extends Component {
     }
 
     render() {
-        if (this.state.dataError) {
-            alert('Something went wrong, please try again.');
-            return '';
-        }
-        return (
+
+        return ( this.state.apiError ? '' :
            <div className={styles.adsOverlay}> 
             <div className={styles.adsForm}>
               <ul>
@@ -123,7 +120,7 @@ class Adsform extends Component {
                         name="name"
                         type="text"
                         value={this.state.name}
-                        ref={node => this._setFormNode('name', node)}
+                        ref={node => this.setFormNode('name', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter Slot Name" />
                    <span className={ this.state.errors.name ? styles.errorShow : styles.errorHide}>{this.state.errors.name}</span>
@@ -135,7 +132,7 @@ class Adsform extends Component {
                         name="format"
                         type="text"
                         value={this.state.format}
-                        ref={node => this._setFormNode('format', node)}
+                        ref={node => this.setFormNode('format', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter Ads Format" />
                    <span className={ this.state.errors.format ? styles.errorShow : styles.errorHide}>{this.state.errors.format}</span>
@@ -147,7 +144,7 @@ class Adsform extends Component {
                         name="url"
                         type="text"
                         value={this.state.url}
-                        ref={node => this._setFormNode('url', node)}
+                        ref={node => this.setFormNode('url', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter URL" />
                    <span className={ this.state.errors.url ? styles.errorShow : styles.errorHide}>{this.state.errors.url}</span>
@@ -159,7 +156,7 @@ class Adsform extends Component {
                         name="price"
                         type="text"
                         value={this.state.price}
-                        ref={node => this._setFormNode('price', node)}
+                        ref={node => this.setFormNode('price', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter Price" />
                    <span className={ this.state.errors.price ? styles.errorShow : styles.errorHide}>{this.state.errors.price}</span>
@@ -170,7 +167,7 @@ class Adsform extends Component {
                         id="type"
                         name="type"
                         value={this.state.type}
-                        ref={node => this._setFormNode('type', node)}
+                        ref={node => this.setFormNode('type', node)}
                         onChange={this.handleInputChange}>
                              <option value="">Select Type</option>
                              { Object.keys(this.slotTypes).map(key => {
@@ -187,7 +184,7 @@ class Adsform extends Component {
                         id="fallback"
                         name="fallback"
                         checked={this.state.fallback}
-                        ref={node => this._setFormNode('fallback', node)}
+                        ref={node => this.setFormNode('fallback', node)}
                         onChange={this.handleInputChange}
                         type="checkbox" />
                 </li>
@@ -204,14 +201,16 @@ class Adsform extends Component {
 
 
 Adsform.propTypes = {
-    formData: PropTypes.object.isRequired,
+    formData: PropTypes.any.isRequired,
     id: PropTypes.number,
     cancelForm: PropTypes.func,
-    dispatch: PropTypes.object.isRequired
+    apiError: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  formData: state.getIn(['adslots', 'formData']).toJS()
+  formData: state.getIn(['adslots', 'formData']).toJS(),
+  apiError: state.getIn(['adslots', 'apiError'])
 });
 
 export default connect(mapStateToProps, (dispatch) => ({ dispatch }))(Adsform);

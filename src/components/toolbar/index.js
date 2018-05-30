@@ -1,6 +1,6 @@
 import React from 'react';
-import Buttons from '../buttons/buttons';
-import Filter from '../filter/filter';
+import Buttons from '../buttons/';
+import Filter from '../filter/';
 import styles from './toolbar.css';
 
 const Toolbar = () => {

@@ -24,8 +24,8 @@ const SlotList = ({slots, selected, onSlotCheckboxChange}) => {
 
 
 SlotList.propTypes = {
-    slots: PropTypes.object.isRequired,
-    selected: PropTypes.array,
+    slots: PropTypes.any.isRequired,
+    selected: PropTypes.any,
     onSlotCheckboxChange: PropTypes.func.isRequired
 }
 

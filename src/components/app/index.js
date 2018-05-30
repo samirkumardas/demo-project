@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Header from '../header/header';
-import Toolbar from '../toolbar/toolbar';
+import Header from '../header/';
+import Toolbar from '../toolbar/';
 import { fetchSlotsReq } from '../adslots/reducer';
-import { toggleLoader } from '../loader/reducer';
-import Adslots from '../adslots/adslots';
-import Loader from '../loader/loader';
+import Adslots from '../adslots/';
+import Notice from '../notice/';
+import Loader from '../loader/';
 import styles from './app.css';
 
 class App extends Component {
@@ -17,12 +17,12 @@ class App extends Component {
 
     componentDidMount() {
         this.props.dispatch(fetchSlotsReq());
-        this.props.dispatch(toggleLoader());
     }
 
     render() {
         return (
             <div className={styles.app}>
+                <Notice />
                 <Loader showLoader = {this.props.loading} />
                 <Header />
                 <Toolbar />
@@ -40,8 +40,8 @@ const mapStateToProps = (state) => {
 };
 
 App.propTypes = {
-    loading: PropTypes.boolean,
-    dispatch: PropTypes.object.isRequired
+    loading: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, dispatch => ({dispatch}))(App);
