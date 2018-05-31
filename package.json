@@ -1,7 +1,7 @@
 {
   "name": "adslots",
   "version": "1.0.0",
-  "description": "",
+  "description": "adslots demo project",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
