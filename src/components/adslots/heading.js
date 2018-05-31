@@ -10,6 +10,7 @@ const Heading = (props) => {
             <td>Name</td>
             <td>Type</td>
             <td>Format</td>
+            <td>URL</td>
         </tr>
        </thead>
     );  

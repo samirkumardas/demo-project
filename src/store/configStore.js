@@ -9,7 +9,10 @@ import rootSaga from './rootSaga';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 
-middlewares.push(Logger);
+
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(Logger);
+}
 
  /* eslint-disable no-underscore-dangle */
 const composeEnhancers = process.env.NODE_ENV !== 'production'

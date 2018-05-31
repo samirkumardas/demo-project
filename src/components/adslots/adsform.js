@@ -55,6 +55,7 @@ class Adsform extends Component {
             }
         });
 
+        /* Reset errors message */
         this.setState({
             errors:errors
         });

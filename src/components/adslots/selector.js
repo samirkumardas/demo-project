@@ -14,7 +14,9 @@ export const getFilteredSlots = createSelector(
             format = filter.get('format'),
             regex = new RegExp(keyword,"ig"),
             valid = true;
-        if (keyword && (slot.name.search(regex) === -1 && slot.id.toString().search(regex) === -1)) {
+        if (keyword && (slot.name.search(regex) === -1
+            && slot.format.search(regex) === -1
+            && slot.id.toString().search(regex) === -1)) {
            valid = false;
         }
         if (type && slot.type !== type) {

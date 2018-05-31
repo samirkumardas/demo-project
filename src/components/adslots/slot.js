@@ -10,6 +10,7 @@ const Slot = ({ slot, isChecked, onSlotCheckboxChange }) => {
                 <td>{slot.name}</td>
                 <td>{getSlotTypeName(slot.type) }</td>
                 <td>{slot.format}</td>
+                <td>{slot.url}</td>
             </tr>
     );  
 };

@@ -29,8 +29,8 @@ function* doErrorStuff(err) {
 function* workerFetchSlots() {
   const requestURL = CONSTANTS.SERVER_URL +  CONSTANTS.API_REQUEST.ADSLOT;
   try {
-    const response = yield call(request, requestURL);
     yield call(doPreStuff);
+    const response = yield call(request, requestURL);
     yield put(insertSlot(response.data.adslots));
     yield call(doPostStuff);
   } catch (err) {
@@ -46,8 +46,8 @@ export function* watcherFetchSlots() {
 function* workerFetchSlotDetail(action) {
   const requestURL = CONSTANTS.SERVER_URL + CONSTANTS.API_REQUEST.ADSLOT + action.payload;
   try {
-    const response = yield call(request, requestURL);
     yield call(doPreStuff);
+    const response = yield call(request, requestURL);
     yield put(slotDetailSuccess(response.data.adslot));
     yield call(doPostStuff);
   } catch (err) {
@@ -66,9 +66,9 @@ function* workerSaveSlot(action) {
         requestURL = CONSTANTS.SERVER_URL + CONSTANTS.API_REQUEST.ADSLOT + (id ? id : ''),
         options = getAPIRequestHeader(payload, id);
   try {
-    const response = yield call(request, requestURL, options);
     yield call(doPreStuff);
-    yield put(setSlot(response.data.adslot ? response.data.adslot : payload));
+    const response = yield call(request, requestURL, options);
+    yield put(setSlot(response && response.data.adslot ? response.data.adslot : {...payload, id}));
     yield call(doPostStuff);
     yield put(setNotice({
         message: 'Adslot has been saved successfully.',

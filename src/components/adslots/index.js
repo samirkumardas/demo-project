@@ -24,12 +24,13 @@ class Adslots extends PureComponent {
                <table className={styles.slotGrid}>
                 <Heading
                     onSlotCheckboxChange={this.onSlotCheckboxChange}
-                    isChecked = {this.props.slots.size <= this.props.selected.size} 
+                    isChecked = {this.props.slots.size <= this.props.selected.size && this.props.selected.size > 0} 
                  />
                  <SlotList
                     slots={this.props.slots}
                     selected={this.props.selected}
-                    onSlotCheckboxChange={this.onSlotCheckboxChange} />
+                    onSlotCheckboxChange={this.onSlotCheckboxChange}
+                    loading={this.props.loading} />
                </table>
              </div>
         );  
@@ -39,12 +40,14 @@ class Adslots extends PureComponent {
 
 const mapStateToProps = (state, props) => ({
   slots: getFilteredSlots(state, props),
-  selected: state.getIn(['adslots', 'selected'])
+  selected: state.getIn(['adslots', 'selected']),
+  loading: state.get('loader')
 });
 
 Adslots.propTypes = {
     slots: PropTypes.any.isRequired,
-    selected: PropTypes.any,
+    selected: PropTypes.any.isRequired,
+    loading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
 };
 

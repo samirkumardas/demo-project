@@ -15,7 +15,7 @@ class Notice extends PureComponent {
         this.clearTimer();
         this.timer = window.setTimeout(()=>{
             this.closeNotice();
-        }, 2000);
+        }, 2500);
     }
 
     closeNotice() {
