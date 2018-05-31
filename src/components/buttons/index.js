@@ -25,7 +25,7 @@ class Buttons extends PureComponent {
 
     showForm(event) {
         this.editSlotId = event.target.name == 'edit' ? this.props.selected.last() : 0;
-        this.props.dispatch(slotDetailSuccess({})); // let make previous data blank
+        this.props.dispatch(slotDetailSuccess({})); // let make previous form data blank
         this.props.dispatch(showSlotForm());
     }
 
