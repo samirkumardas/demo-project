@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import CONSTANTS from 'config/constants';
 import request from 'utils/request';
 import { fetchSlotsReq, slotSaveReq, slotDetailReq, insertSlot, setSlot, slotDetailSuccess } from './reducer';
 import { showLoader, hideLoader } from '../loader/reducer';
@@ -24,9 +25,9 @@ function* doErrorStuff(err) {
     }));
 }
 
-/* fetch list */
+/* fetch slots list */
 function* workerFetchSlots() {
-  const requestURL = 'http://localhost:8080/adslots/';
+  const requestURL = CONSTANTS.SERVER_URL +  CONSTANTS.API_REQUEST.ADSLOT;
   try {
     const response = yield call(request, requestURL);
     yield call(doPreStuff);
@@ -41,9 +42,9 @@ export function* watcherFetchSlots() {
   yield takeLatest(fetchSlotsReq.getType(), workerFetchSlots);
 }
 
-/* Fetch detail*/
+/* Fetch slot detail*/
 function* workerFetchSlotDetail(action) {
-  const requestURL = 'http://localhost:8080/adslots/'+action.payload;
+  const requestURL = CONSTANTS.SERVER_URL + CONSTANTS.API_REQUEST.ADSLOT + action.payload;
   try {
     const response = yield call(request, requestURL);
     yield call(doPreStuff);
@@ -58,11 +59,11 @@ export function* watcherFetchSlotDetail() {
   yield takeLatest(slotDetailReq.getType(), workerFetchSlotDetail);
 }
 
-/* edit OR add*/
+/* edit OR add slot */
 function* workerSaveSlot(action) {
   const payload = action.payload.data,
         id = action.payload.id,
-        requestURL = 'http://localhost:8080/adslots/' + (id ? id : ''),
+        requestURL = CONSTANTS.SERVER_URL + CONSTANTS.API_REQUEST.ADSLOT + (id ? id : ''),
         options = getAPIRequestHeader(payload, id);
   try {
     const response = yield call(request, requestURL, options);

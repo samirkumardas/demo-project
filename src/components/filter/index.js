@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getSlotTypes } from 'utils/helper';
 import { updateFilterKeyword, updateFilterType, updateFilterFormat } from './reducer';
 import styles from './filter.css';
 
-class Filter extends Component {
+class Filter extends PureComponent {
     
     constructor(props) {
         super(props);
@@ -19,11 +19,11 @@ class Filter extends Component {
         this.props.dispatch(updateFilterType(event.target.value));
     }
 
-    onKeywordChange(event) { // TODO bounce 
+    onKeywordChange(event) { // TODO - apply a bounce 
         this.props.dispatch(updateFilterKeyword(event.target.value));
     }
 
-    onFormatChange(event) { // selector for format dropdown
+    onFormatChange(event) { // selector for format dropdown, oops, skipping deliberately
         this.props.dispatch(updateFilterFormat(event.target.value));
     }
 

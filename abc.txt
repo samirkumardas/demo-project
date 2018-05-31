@@ -1,8 +1,0 @@
-{
-  "name": "string",
-  "type": 1,
-  "url": "string",
-  "format": "string",
-  "price": 0,
-  "fallback": false
-}

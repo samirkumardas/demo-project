@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../header/';
@@ -9,7 +9,7 @@ import Notice from '../notice/';
 import Loader from '../loader/';
 import styles from './app.css';
 
-class App extends Component {
+class App extends PureComponent {
     
     constructor(props) {
         super(props);
@@ -30,7 +30,6 @@ class App extends Component {
              </div>
         );  
     }
-        
 }
 
 const mapStateToProps = (state) => {

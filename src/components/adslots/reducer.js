@@ -9,13 +9,12 @@ export const updateSelectedSlot =  createAction('UPDATE_SELECTED_SLOT');
 export const clearSelection =  createAction('CLEAR_SELECTION');
 export const showSlotForm =  createAction('SHOW_SLOT_FORM');
 export const hideSlotForm =  createAction('HIDE_SLOT_FORM');
-/* Request to API */
+export const slotDetailSuccess =  createAction('SLOT_DETAIL_SUCCESS');
 
+/* API Request */
 export const fetchSlotsReq =  createAction('FETCH_SLOTS_REQ');
 export const slotSaveReq =  createAction('SLOT_SAVE_REQ');
 export const slotDetailReq =  createAction('SLOT_DETAIL_REQ');
-//export const saveFailed =  createAction('SLOT_SAVE_FAILED');
-export const slotDetailSuccess =  createAction('SLOT_DETAIL_SUCCESS');
 
 
 const findIndexFromList = (list, key, find) => {
@@ -34,7 +33,7 @@ const onSelectionChange = (state, payload) => {
         [id,filteredSlots] = payload;
     
     id = parseInt(id, 10);
-    /* checkbox was "CheckALl" one */
+    /* if the checkbox is "CheckALl" one, nark other checkboxes  */
     if (id === 0) {
         selected = (filteredSlots.size === selected.size) ?
             selected.clear() : selected.clear().concat(getAllSlodIds(filteredSlots));

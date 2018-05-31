@@ -42,7 +42,8 @@
 }
 
 .adsForm li.formBtn{
-    text-align: right;;
+    text-align: right;
+    width: 95%;
 }
 
 .adsForm ul li  span{

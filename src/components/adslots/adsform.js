@@ -29,6 +29,7 @@ class Adsform extends Component {
     }
 
     componentDidMount() {
+        /* lets fetch slot detial in edit mode */
         if (this.props.id) {
             this.requestSlotDetail();
         }
@@ -40,6 +41,7 @@ class Adsform extends Component {
             payload = {},
             id;
 
+        /* Validate forn based on rules defined in utils/helper */
         this.rules.forEach((rule) => {
             if (rule.required
                 && (!this.state[rule.name]
@@ -68,12 +70,6 @@ class Adsform extends Component {
 
     requestSlotDetail() {
         this.props.dispatch(slotDetailReq(this.props.id,10));
-    }
-
-    setFormNode(type, node) {
-        this.rules.forEach((rule) => {
-            type === rule.type ? (rule.node = node && rule) : rule;
-        });
     }
 
     handleInputChange(event) {
@@ -120,7 +116,6 @@ class Adsform extends Component {
                         name="name"
                         type="text"
                         value={this.state.name}
-                        ref={node => this.setFormNode('name', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter Slot Name" />
                    <span className={ this.state.errors.name ? styles.errorShow : styles.errorHide}>{this.state.errors.name}</span>
@@ -132,7 +127,6 @@ class Adsform extends Component {
                         name="format"
                         type="text"
                         value={this.state.format}
-                        ref={node => this.setFormNode('format', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter Ads Format" />
                    <span className={ this.state.errors.format ? styles.errorShow : styles.errorHide}>{this.state.errors.format}</span>
@@ -144,7 +138,6 @@ class Adsform extends Component {
                         name="url"
                         type="text"
                         value={this.state.url}
-                        ref={node => this.setFormNode('url', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter URL" />
                    <span className={ this.state.errors.url ? styles.errorShow : styles.errorHide}>{this.state.errors.url}</span>
@@ -156,7 +149,6 @@ class Adsform extends Component {
                         name="price"
                         type="text"
                         value={this.state.price}
-                        ref={node => this.setFormNode('price', node)}
                         onChange={this.handleInputChange}
                         placeholder="Enter Price" />
                    <span className={ this.state.errors.price ? styles.errorShow : styles.errorHide}>{this.state.errors.price}</span>
@@ -167,7 +159,6 @@ class Adsform extends Component {
                         id="type"
                         name="type"
                         value={this.state.type}
-                        ref={node => this.setFormNode('type', node)}
                         onChange={this.handleInputChange}>
                              <option value="">Select Type</option>
                              { Object.keys(this.slotTypes).map(key => {
@@ -184,7 +175,6 @@ class Adsform extends Component {
                         id="fallback"
                         name="fallback"
                         checked={this.state.fallback}
-                        ref={node => this.setFormNode('fallback', node)}
                         onChange={this.handleInputChange}
                         type="checkbox" />
                 </li>

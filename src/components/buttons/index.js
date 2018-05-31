@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Adsform from '../adslots/adsform';
-import { showSlotForm, hideSlotForm } from '../adslots/reducer';
+import { slotDetailSuccess, showSlotForm, hideSlotForm } from '../adslots/reducer';
 import styles from './buttons.css';
 
-class Buttons extends Component {
+class Buttons extends PureComponent {
     
     constructor(props) {
         super(props);
@@ -25,6 +25,7 @@ class Buttons extends Component {
 
     showForm(event) {
         this.editSlotId = event.target.name == 'edit' ? this.props.selected.last() : 0;
+        this.props.dispatch(slotDetailSuccess({})); // let make previous data blank
         this.props.dispatch(showSlotForm());
     }
 

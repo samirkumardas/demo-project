@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateSelectedSlot } from './reducer';
@@ -7,7 +7,7 @@ import Heading from './heading';
 import SlotList from './slotlist';
 import styles from './adslots.css';
 
-class Adslots extends Component {
+class Adslots extends PureComponent {
     
     constructor(props) {
         super(props);

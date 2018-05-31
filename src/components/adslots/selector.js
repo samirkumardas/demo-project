@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 const slotsSelector = state => state.getIn(['adslots', 'slots']);
 const filterSelector = state => state.get('filter');
 
+/* lets define a selector for filter option */
 export const getFilteredSlots = createSelector(
   slotsSelector,
   filterSelector,
@@ -26,9 +27,3 @@ export const getFilteredSlots = createSelector(
     });
   }
 );
-
-/*
-export const getSlotDetailById = (id) => {
-  const index = slotsSelector.findIndex(slot => slot.id === id);
-  return slotsSelector.get(index);
-}; */
