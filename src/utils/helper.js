@@ -17,7 +17,7 @@ export const getFormRules = () => {
     rules.push({
         name:'format',
         required: true,
-        regex: /[1-9][0-9]{0,3}x[1-9][0-9]{0,3}$/,
+        regex: /^[1-9][0-9]{0,3}x[1-9][0-9]{0,3}$/,
         message: 'Please enter a valid format e.g 200x300',
         type: 'string'
     });
@@ -25,7 +25,7 @@ export const getFormRules = () => {
     rules.push({
         name: 'price',
         required: true,
-        regex: /[1-9][0-9]{0,5}$/,
+        regex: /^[1-9][0-9]{0,5}$/,
         message: 'Please enter price',
         type: 'number'
     });

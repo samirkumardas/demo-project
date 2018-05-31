@@ -33,6 +33,7 @@
 .adsForm ul li {
     padding: 5px;
     width: 240px;
+    height: 63px;
     float: left;
 }
 
@@ -43,6 +44,7 @@
 
 .adsForm li.formBtn{
     text-align: right;
+    height: 30px;
     width: 95%;
 }
 
